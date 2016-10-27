@@ -1,0 +1,24 @@
+{
+  "name": "monabsence",
+  "version": "1.0.0",
+  "description": "monabsence",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fan2misa/monabsence.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fan2misa/monabsence/issues"
+  },
+  "homepage": "https://github.com/fan2misa/monabsence#readme",
+  "dependencies": {
+    "electron": "^1.4.4",
+    "file-saver": "^1.3.3",
+    "jquery": "^3.1.1"
+  }
+}

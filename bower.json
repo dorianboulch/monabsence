@@ -1,0 +1,17 @@
+{
+  "name": "monabsence",
+  "description": "monabsence",
+  "main": "main.js",
+  "authors": [
+    "Gwennael Jean <gwennael.jean@trsb.net>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/fan2misa/monabsence",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
