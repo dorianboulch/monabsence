@@ -10,7 +10,7 @@ var fs = require('fs');
 var Docxtemplater = require('docxtemplater');
 var FileSaver = require('file-saver');
 
-var profil = require('./../profil.json');
+var profil = require('./../files/profil.json');
 
 var content = fs.readFileSync(__dirname + "/../files/input.docx", "binary");
 
