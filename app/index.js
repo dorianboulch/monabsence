@@ -10,9 +10,14 @@ var fs = require('fs');
 var Docxtemplater = require('docxtemplater');
 var FileSaver = require('file-saver');
 
+var profil = require('./../profil.json');
+
 var content = fs.readFileSync(__dirname + "/../files/input.docx", "binary");
 
-document.getElementById('save').addEventListener("click", function () {
+$('#form').find('[name=nom]').val(profil.nom);
+$('#form').find('[name=prenom]').val(profil.prenom);
+
+$('#save').on("click", function () {
 
     var doc = new Docxtemplater(content);
 

@@ -16,6 +16,8 @@ var Window = {
             height: 800
         });
 
+        Window.main.setMenu(Window.getMenu());
+
         Window.main.loadURL('file://' + __dirname + '/index.html');
 
         Window.main.webContents.openDevTools();
@@ -23,8 +25,29 @@ var Window = {
         Window.main.on('closed', function () {
             Window.main = null;
         });
-    }
+    },
     
+    getMenu: function () {
+        return electron.Menu.buildFromTemplate([
+            {
+                label: 'Configuration',
+                submenu: [
+                    {
+                        label: 'Profil',
+                        click: function () {
+                            Window.main.loadURL('file://' + __dirname + '/profil.html');
+                        }
+                    }
+                ]
+            },
+            {
+                label: 'Quitter',
+                click: function () {
+                    electron.app.quit();
+                }
+            }
+        ]);
+    }
 };
 
 electron.app.on('ready', Window.create);
