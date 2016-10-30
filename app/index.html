@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="components/foundation-sites/dist/foundation.min.css" />
+        <link rel="stylesheet" href="components/font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="components/foundation-datepicker/css/foundation-datepicker.min.css" />
     </head>
     <body>
@@ -73,7 +74,8 @@
             jQuery(document).foundation();
             
             jQuery('.fdatepicker').fdatepicker({
-                language: 'fr'
+                language: 'fr',
+                format: 'dd/mm/yyyy'
             });
         </script>
         <script type="text/javascript" src="index.js"></script>
