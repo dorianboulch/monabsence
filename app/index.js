@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 
-var $ = require("jquery");
-
 var fs = require('fs');
 var Docxtemplater = require('docxtemplater');
 var FileSaver = require('file-saver');
@@ -17,20 +15,20 @@ var content = fs.readFileSync(__dirname + "/../files/input.docx", "binary");
 storage.get('profil', function(error, data) {
     if (error) throw error;
 
-    $('#form').find('[name=nom]').val(data.nom);
-    $('#form').find('[name=prenom]').val(data.prenom); 
+    jQuery('body').find('[name=nom]').val(data.nom);
+    jQuery('body').find('[name=prenom]').val(data.prenom); 
 });
 
-$('#save').on("click", function () {
+jQuery('#save').on("click", function () {
 
     var doc = new Docxtemplater(content);
 
     doc.setData({
         title       : getTitle(),
-        nom         : $('#form').find('[name=nom]').val(),
-        prenom      : $('#form').find('[name=prenom]').val(),
-        date_debut  : $('#form').find('[name=date_debut]').val(),
-        date_fin    : $('#form').find('[name=date_fin]').val(),
+        nom         : jQuery('body').find('[name=nom]').val(),
+        prenom      : jQuery('body').find('[name=prenom]').val(),
+        date_debut  : jQuery('body').find('[name=date_debut]').val(),
+        date_fin    : jQuery('body').find('[name=date_fin]').val(),
         today       : getToday()
     });
 
@@ -38,11 +36,11 @@ $('#save').on("click", function () {
 
     var out = doc.getZip().generate({type: "blob"});
 
-    FileSaver.saveAs(out, "Demande de " + $('#form').find('[name=type]:checked').val() + ".docx");
+    FileSaver.saveAs(out, "Demande de " + jQuery('body').find('[name=type]:checked').val() + ".docx");
 });
 
 function getTitle() {
-    switch ($('#form').find('[name=type]:checked').val()) {
+    switch (jQuery('body').find('[name=type]:checked').val()) {
         case 'CP'  : return 'Demande de congés'; break;
         case 'RTT' : return 'Demande de jours de RTT pour Non-Cadre'; break;
     }

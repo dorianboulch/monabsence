@@ -4,24 +4,46 @@
         <title>Mon absence</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <link rel="stylesheet" href="components/foundation-sites/dist/foundation.min.css" />
     </head>
     <body>
-        <table id="form">
-            <tr>
-                <th>Nom :</th>
-                <td><input type="text" name="nom"/></td>
-            </tr>
-            <tr>
-                <th>Prénom :</th>
-                <td><input type="text" name="prenom"/></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button id="save">Enregistrer</button>
-                </td>
-            </tr>
-        </table>
+        <div class="container">
+            <h1 class="text-center">Demande d'absence</h1>
+            <div class="row">
+                <div class="small-12 columns">
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <label for="form-nom" class="right inline">Nom :</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <input type="text" id="form-nom" name="nom" placeholder="Nom ...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <label for="form-prenom" class="right inline">Prénom :</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <input type="text" id="form-prenom" name="prenom" placeholder="Prénom ...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <div class="text-center">
+                                <button id="save" class="button">Enregistrer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var jQuery = require("jquery"); 
+        </script>
+        <script type="text/javascript" src="components/foundation-sites/dist/foundation.min.js"></script>
+        <script>
+            jQuery(document).foundation();
+        </script>
         <script type="text/javascript" src="profil.js"></script>
     </body>
 </html>
