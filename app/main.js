@@ -12,15 +12,15 @@ var Window = {
     
     create: function () {
         Window.main = new electron.BrowserWindow({
-            width: 1400,
-            height: 800
+            width: 600,
+            height: 450
         });
 
         Window.main.setMenu(Window.getMenu());
 
         Window.main.loadURL('file://' + __dirname + '/index.html');
 
-        Window.main.webContents.openDevTools();
+        // Window.main.webContents.openDevTools();
 
         Window.main.on('closed', function () {
             Window.main = null;
