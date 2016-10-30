@@ -12,8 +12,8 @@ var Window = {
     
     create: function () {
         Window.main = new electron.BrowserWindow({
-            width: 600,
-            height: 450
+            width: 550,
+            height: 600
         });
 
         Window.main.setMenu(Window.getMenu());
