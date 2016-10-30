@@ -8,11 +8,13 @@ var $ = require("jquery");
 
 var fs = require('fs');
 
+var storage = require('electron-json-storage');
+
 $('#save').on("click", function () {
-    fs.writeFile("files/profil.json", JSON.stringify({
+    storage.set('profil', {
         nom     : $('#form').find('[name=nom]').val(),
         prenom  : $('#form').find('[name=prenom]').val()
-    }));
+    });
     
     window.location.href = 'index.html';
 });

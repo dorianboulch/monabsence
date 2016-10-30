@@ -10,12 +10,16 @@ var fs = require('fs');
 var Docxtemplater = require('docxtemplater');
 var FileSaver = require('file-saver');
 
-var profil = require('./../files/profil.json');
+var storage = require('electron-json-storage');
 
 var content = fs.readFileSync(__dirname + "/../files/input.docx", "binary");
 
-$('#form').find('[name=nom]').val(profil.nom);
-$('#form').find('[name=prenom]').val(profil.prenom);
+storage.get('profil', function(error, data) {
+    if (error) throw error;
+
+    $('#form').find('[name=nom]').val(data.nom);
+    $('#form').find('[name=prenom]').val(data.prenom); 
+});
 
 $('#save').on("click", function () {
 
