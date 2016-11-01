@@ -34,7 +34,7 @@
                             <label for="form-date_debut" class="right inline">Date de début :</label>
                         </div>
                         <div class="small-9 columns">
-                            <input type="text" id="form-date_debut" class="fdatepicker" name="date_debut" placeholder="Date de début ...">
+                            <input type="text" id="form-date_debut" class="datepicker_debut" name="date_debut" placeholder="Date de début ...">
                         </div>
                     </div>
                     <div class="row">
@@ -42,7 +42,7 @@
                             <label for="form-date_fin" class="right inline">Date de fin :</label>
                         </div>
                         <div class="small-9 columns">
-                            <input type="text" id="form-date_fin" class="fdatepicker" name="date_fin" placeholder="Date de fin ...">
+                            <input type="text" id="form-date_fin" class="datepicker_fin" name="date_fin" placeholder="Date de fin ...">
                         </div>
                     </div>
                     <div class="row">
@@ -72,11 +72,6 @@
         <script type="text/javascript" src="components/foundation-datepicker/js/locales/foundation-datepicker.fr.js"></script>
         <script>
             jQuery(document).foundation();
-            
-            jQuery('.fdatepicker').fdatepicker({
-                language: 'fr',
-                format: 'dd/mm/yyyy'
-            });
         </script>
         <script type="text/javascript" src="index.js"></script>
     </body>
