@@ -12,7 +12,7 @@ var Window = {
     
     create: function () {
         Window.main = new electron.BrowserWindow({
-            width: 950,
+            width: 550,
             height: 600
         });
 
@@ -20,7 +20,7 @@ var Window = {
 
         Window.main.loadURL('file://' + __dirname + '/index.html');
 
-        Window.main.webContents.openDevTools();
+        // Window.main.webContents.openDevTools();
 
         Window.main.on('closed', function () {
             Window.main = null;
