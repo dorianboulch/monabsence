@@ -35,6 +35,7 @@ jQuery('#signature').on("click", function () {
         properties: ['openFile']
     }, function (filenames) {
         jQuery('body').find('[name=signature]').val(filenames[0]);
+        jQuery('#signature_visuel').empty();
         jQuery('#signature_visuel').append(jQuery('<img />').attr('src', filenames[0]));
     });
 });

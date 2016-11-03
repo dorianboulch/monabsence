@@ -1,0 +1,45 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run-script',
+1 verbose cli   'start' ]
+2 info using npm@3.3.6
+3 info using node@v5.0.0
+4 verbose run-script [ 'prestart', 'start', 'poststart' ]
+5 info lifecycle monabsence@1.0.0~prestart: monabsence@1.0.0
+6 silly lifecycle monabsence@1.0.0~prestart: no script for prestart, continuing
+7 info lifecycle monabsence@1.0.0~start: monabsence@1.0.0
+8 verbose lifecycle monabsence@1.0.0~start: unsafe-perm in lifecycle true
+9 verbose lifecycle monabsence@1.0.0~start: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;C:\Users\gjean\workspace-perso\monabsence\node_modules\.bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Services\IPT\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\Java\jdk1.8.0_65\bin;c:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files (x86)\Inno Setup 5;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;c:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\;c:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\DTS\Binn\;c:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\ManagementStudio\;c:\Program Files (x86)\Microsoft SQL Server\110\DTS\Binn\;C:\HashiCorp\Vagrant\bin;C:\MinGW\msys\1.0\bin;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\bin;C:\cygwin64\bin;C:\MinGW\bin;C:\HashiCorp\Vagrant\embedded\mingw\bin;C:\Users\gjean\phar\phpunit.phar;C:\Program Files\nodejs;C:\Users\gjean\AppData\Local\Android\android-sdk\tools;C:\Users\gjean\AppData\Local\Android\android-sdk\platform-tools;C:\Users\gjean\app\apache-ant\bin;C:\Program Files (x86)\Brackets\command;C:\wamp\bin\mysql\mysql5.6.17\bin;C:\wamp\bin\php\php5.5.12;C:\Program Files (x86)\PostgreSQL\9.3\bin;C:\Users\gjean\AppData\Local\Programs\Python\Python36-32\Scripts;C:\Users\gjean\AppData\Local\Programs\Python\Python35-32\Scripts\;C:\Users\gjean\AppData\Local\Programs\Python\Python35-32\;C:\Users\gjean\AppData\Roaming\npm;C:\Program Files\Docker Toolbox;C:\Program Files (x86)\Microsoft VS Code\bin
+10 verbose lifecycle monabsence@1.0.0~start: CWD: C:\Users\gjean\workspace-perso\monabsence
+11 silly lifecycle monabsence@1.0.0~start: Args: [ '/d /s /c', 'electron .' ]
+12 silly lifecycle monabsence@1.0.0~start: Returned: code: 2147483651  signal: null
+13 info lifecycle monabsence@1.0.0~start: Failed to exec start script
+14 verbose stack Error: monabsence@1.0.0 start: `electron .`
+14 verbose stack Exit status 2147483651
+14 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:233:16)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at EventEmitter.emit (events.js:172:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at ChildProcess.emit (events.js:172:7)
+14 verbose stack     at maybeClose (internal/child_process.js:818:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+15 verbose pkgid monabsence@1.0.0
+16 verbose cwd C:\Users\gjean\workspace-perso\monabsence
+17 error Windows_NT 6.1.7601
+18 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run-script" "start"
+19 error node v5.0.0
+20 error npm  v3.3.6
+21 error code ELIFECYCLE
+22 error monabsence@1.0.0 start: `electron .`
+22 error Exit status 2147483651
+23 error Failed at the monabsence@1.0.0 start script 'electron .'.
+23 error This is most likely a problem with the monabsence package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     electron .
+23 error You can get their info via:
+23 error     npm owner ls monabsence
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

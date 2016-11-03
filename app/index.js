@@ -25,33 +25,44 @@ storage.get('profil', function (error, data) {
 
 jQuery('#save').on("click", function () {
 
-    var doc = new Docxtemplater(content);
+    if (jQuery('body').find('[name=date_debut]').val() && jQuery('body').find('[name=date_fin]').val()) {
+        var doc = new Docxtemplater(content);
     
-    doc.attachModule(new ImageModule({
-        centered: false,
-        getImage: function (tagValue, tagName) {
-            return fs.readFileSync(tagValue,'binary');
-        },
-        getSize: function (img, tagValue, tagName) {
-            return [150,150];
+        doc.attachModule(new ImageModule({
+            centered: false,
+            getImage: function (tagValue, tagName) {
+                return fs.readFileSync(tagValue,'binary');
+            },
+            getSize: function (img, tagValue, tagName) {
+                sizeOf = require('image-size');
+                var dimensions = sizeOf(jQuery('body').find('[name=signature]').val());
+                return [dimensions.width, dimensions.height];
+            }
+        }));
+
+        doc.setData({
+            title: getTitle(),
+            nom: jQuery('body').find('[name=nom]').val(),
+            prenom: jQuery('body').find('[name=prenom]').val(),
+            texte_absence: getTexteAbsence(),
+            today: getToday(),
+            signature: jQuery('body').find('[name=signature]').val()
+        });
+
+        doc.render();
+
+        var out = doc.getZip().generate({type: "blob"});
+
+        FileSaver.saveAs(out, "Demande de " + jQuery('body').find('[name=type]:checked').val() + ".docx");
+    } else {
+        if (!jQuery('body').find('[name=date_debut]').val()) {
+            jQuery('body').find('[name=date_debut]').addClass('error');
         }
-    }));
-
-    doc.setData({
-        title: getTitle(),
-        nom: jQuery('body').find('[name=nom]').val(),
-        prenom: jQuery('body').find('[name=prenom]').val(),
-        date_debut: jQuery('body').find('[name=date_debut]').val(),
-        date_fin: jQuery('body').find('[name=date_fin]').val(),
-        today: getToday(),
-        signature: jQuery('body').find('[name=signature]').val()
-    });
-
-    doc.render();
-
-    var out = doc.getZip().generate({type: "blob"});
-
-    FileSaver.saveAs(out, "Demande de " + jQuery('body').find('[name=type]:checked').val() + ".docx");
+        
+        if (!jQuery('body').find('[name=date_fin]').val()) {
+            jQuery('body').find('[name=date_fin]').addClass('error');
+        }
+    }
 });
 
 initDatePicker();
@@ -104,6 +115,12 @@ function getTitle() {
             return 'Demande de jours de RTT pour Non-Cadre';
             break;
     }
+}
+
+function getTexteAbsence() {
+    return jQuery('body').find('[name=date_debut]').val() === jQuery('body').find('[name=date_fin]').val()
+        ? 'Le ' + jQuery('body').find('[name=date_debut]').val()
+        : 'Du ' + jQuery('body').find('[name=date_debut]').val() + ' (inclus) au ' + jQuery('body').find('[name=date_fin]').val() + ' (inclus)';
 }
 
 /**
