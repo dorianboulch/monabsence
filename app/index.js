@@ -10,6 +10,8 @@ var FileSaver = require('file-saver');
 
 var storage = require('electron-json-storage');
 
+var ImageModule = require('docxtemplater-image-module');
+
 var content = fs.readFileSync(__dirname + "/../files/input.docx", "binary");
 
 storage.get('profil', function (error, data) {
@@ -18,11 +20,19 @@ storage.get('profil', function (error, data) {
 
     jQuery('body').find('[name=nom]').val(data.nom);
     jQuery('body').find('[name=prenom]').val(data.prenom);
+    jQuery('body').find('[name=signature]').val(data.signature);
 });
 
 jQuery('#save').on("click", function () {
 
     var doc = new Docxtemplater(content);
+    
+    doc.attachModule(new ImageModule({
+        centered: false,
+        getImage: function (tagValue, tagName) {
+            return fs.readFileSync(tagValue,'binary');
+        }
+    }));
 
     doc.setData({
         title: getTitle(),
@@ -30,7 +40,8 @@ jQuery('#save').on("click", function () {
         prenom: jQuery('body').find('[name=prenom]').val(),
         date_debut: jQuery('body').find('[name=date_debut]').val(),
         date_fin: jQuery('body').find('[name=date_fin]').val(),
-        today: getToday()
+        today: getToday(),
+        signature: jQuery('body').find('[name=signature]').val()
     });
 
     doc.render();
