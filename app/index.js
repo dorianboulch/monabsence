@@ -31,6 +31,9 @@ jQuery('#save').on("click", function () {
         centered: false,
         getImage: function (tagValue, tagName) {
             return fs.readFileSync(tagValue,'binary');
+        },
+        getSize: function (img, tagValue, tagName) {
+            return [150,150];
         }
     }));
 
