@@ -12,8 +12,6 @@ var storage = require('electron-json-storage');
 
 var ImageModule = require('docxtemplater-image-module');
 
-var content = fs.readFileSync(__dirname + "/../files/input.docx", "binary");
-
 storage.get('profil', function (error, data) {
     if (error)
         throw error;
@@ -26,46 +24,96 @@ storage.get('profil', function (error, data) {
 jQuery('#save').on("click", function () {
 
     if (jQuery('body').find('[name=date_debut]').val() && jQuery('body').find('[name=date_fin]').val()) {
-        var doc = new Docxtemplater(content);
-    
-        doc.attachModule(new ImageModule({
-            centered: false,
-            getImage: function (tagValue, tagName) {
-                return fs.readFileSync(tagValue,'binary');
-            },
-            getSize: function (img, tagValue, tagName) {
-                sizeOf = require('image-size');
-                var dimensions = sizeOf(jQuery('body').find('[name=signature]').val());
-                return [dimensions.width, dimensions.height];
-            }
-        }));
-
-        doc.setData({
-            title: getTitle(),
-            nom: jQuery('body').find('[name=nom]').val(),
-            prenom: jQuery('body').find('[name=prenom]').val(),
-            texte_absence: getTexteAbsence(),
-            today: getToday(),
-            signature: jQuery('body').find('[name=signature]').val()
-        });
-
-        doc.render();
-
-        var out = doc.getZip().generate({type: "blob"});
-
-        FileSaver.saveAs(out, "Demande de " + jQuery('body').find('[name=type]:checked').val() + ".docx");
+        switch (jQuery('body').find('[name=type]:checked').val()) {
+            case 'conges'   : generateConges(); break;
+            case 'rtt'      : generateRTT(); break;
+        }
     } else {
         if (!jQuery('body').find('[name=date_debut]').val()) {
             jQuery('body').find('[name=date_debut]').addClass('error');
         }
-        
+
         if (!jQuery('body').find('[name=date_fin]').val()) {
             jQuery('body').find('[name=date_fin]').addClass('error');
         }
     }
 });
 
+jQuery('body').find('[data-check]').on('change', function () {
+    checkType();
+});
+
 initDatePicker();
+
+checkType();
+
+function generateConges() {
+    var content = fs.readFileSync(__dirname + "/../files/conges.docx", "binary");
+
+    var doc = new Docxtemplater(content);
+
+    doc.attachModule(new ImageModule({
+        centered: false,
+        getImage: function (tagValue, tagName) {
+            return fs.readFileSync(tagValue,'binary');
+        },
+        getSize: function (img, tagValue, tagName) {
+            sizeOf = require('image-size');
+            var dimensions = sizeOf(tagValue);
+            return [dimensions.width, dimensions.height];
+        }
+    }));
+
+    doc.setData({
+        nom: jQuery('body').find('[name=nom]').val(),
+        prenom: jQuery('body').find('[name=prenom]').val(),
+        texte_absence: getTexteAbsence(),
+        today: getToday(),
+        signature: jQuery('body').find('[name=signature]').val(),
+        conges_payes: getCongesPayes(),
+        conges_exceptionnels: getCongesExceptionnels(),
+        conges_sans_solde: getCongesSansSolde(),
+        motif: jQuery('body').find('[name=motif]').val()
+    });
+
+    doc.render();
+
+    var out = doc.getZip().generate({type: "blob"});
+
+    FileSaver.saveAs(out, "Demande de congés.docx");
+}
+
+function generateRTT() {
+    var content = fs.readFileSync(__dirname + "/../files/rtt.docx", "binary");
+
+    var doc = new Docxtemplater(content);
+
+    doc.attachModule(new ImageModule({
+        centered: false,
+        getImage: function (tagValue, tagName) {
+            return fs.readFileSync(tagValue,'binary');
+        },
+        getSize: function (img, tagValue, tagName) {
+            sizeOf = require('image-size');
+            var dimensions = sizeOf(tagValue);
+            return [dimensions.width, dimensions.height];
+        }
+    }));
+
+    doc.setData({
+        nom: jQuery('body').find('[name=nom]').val(),
+        prenom: jQuery('body').find('[name=prenom]').val(),
+        texte_absence: getTexteAbsence(),
+        today: getToday(),
+        signature: jQuery('body').find('[name=signature]').val(),
+    });
+
+    doc.render();
+
+    var out = doc.getZip().generate({type: "blob"});
+
+    FileSaver.saveAs(out, "Demande de RTT.docx");
+}
 
 /**
  * 
@@ -102,21 +150,6 @@ function initDatePicker() {
     }).data('datepicker');
 }
 
-/**
- * 
- * @returns {String}
- */
-function getTitle() {
-    switch (jQuery('body').find('[name=type]:checked').val()) {
-        case 'CP'  :
-            return 'Demande de congés';
-            break;
-        case 'RTT' :
-            return 'Demande de jours de RTT pour Non-Cadre';
-            break;
-    }
-}
-
 function getTexteAbsence() {
     return jQuery('body').find('[name=date_debut]').val() === jQuery('body').find('[name=date_fin]').val()
         ? 'Le ' + jQuery('body').find('[name=date_debut]').val()
@@ -144,4 +177,34 @@ function getToday() {
     today = dd + '/' + mm + '/' + yyyy;
 
     return today;
+}
+
+/**
+ * 
+ * @returns {undefined}
+ */
+function checkType() {
+    var type = jQuery('body').find('[data-check]:checked').attr('data-check');
+    var value = jQuery('body').find('[data-check]:checked').val();
+    
+    jQuery('body').find('[data-' + type + ']').hide();
+    jQuery('body').find('[data-' + type + '=' + value + ']').show();
+}
+
+function getCongesPayes() {
+    return jQuery('body').find('[name=type]:checked').val() !== 'rtt' && jQuery('body').find('[name=conges]:checked').val() === 'payes'
+        ? __dirname + '/../files/checkbox-checked.png'
+        : __dirname + '/../files/checkbox.png';
+}
+
+function getCongesExceptionnels() {
+    return jQuery('body').find('[name=type]:checked').val() !== 'rtt' && jQuery('body').find('[name=conges]:checked').val() === 'exceptionnels'
+        ? __dirname + '/../files/checkbox-checked.png'
+        : __dirname + '/../files/checkbox.png';
+}
+
+function getCongesSansSolde() {
+    return jQuery('body').find('[name=type]:checked').val() !== 'rtt' && jQuery('body').find('[name=conges]:checked').val() === 'sans solde'
+        ? __dirname + '/../files/checkbox-checked.png'
+        : __dirname + '/../files/checkbox.png';
 }

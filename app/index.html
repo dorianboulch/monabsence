@@ -48,10 +48,39 @@
                     <div class="row">
                         <div class="large-6 columns">
                             <label>Type :</label>
-                            <input type="radio" name="type" value="CP" id="type-cp" checked>
-                            <label for="type-cp">Congés payés</label>
-                            <input type="radio" name="type" value="RTT" id="type-rtt">
+                            <input type="radio" name="type" value="conges" id="type-conges" data-check="type" checked>
+                            <label for="type-conges">Congés</label>
+                            <input type="radio" name="type" value="rtt" id="type-rtt" data-check="type">
                             <label for="type-rtt">RTT</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns" data-type="conges">
+                            <ul>
+                                <li>
+                                    <input type="radio" name="conges" value="payes" id="conges-payes" checked>
+                                    <label for="conges-payes">Congés payés</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="conges" value="exceptionnels" id="conges-exceptionnels">
+                                    <label for="conges-exceptionnels">Congés exceptionnels</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="conges" value="sans solde" id="conges-sans-solde">
+                                    <label for="conges-sans-solde">Congés sans solde</label>
+                                </li>
+                            </ul>
+                            <div class="row">
+                                <div class="small-3 columns">
+                                    <label for="form-motif" class="right inline">Motif :</label>
+                                </div>
+                                <div class="small-9 columns">
+                                    <textarea id="form-motif" name="motif"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="large-12 columns" data-type="rtt">
+                            RTT
                         </div>
                     </div>
                     <div class="row">
