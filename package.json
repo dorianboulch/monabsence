@@ -4,7 +4,9 @@
   "description": "monabsence",
   "main": "app/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . monabsence --platform=win32 --arch=all --out=dist --overwrite",
+    "installer": "node installer.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
     "jquery": "^3.1.1"
   },
   "devDependencies": {
-    "electron-packager": "^8.2.0"
+    "electron-packager": "^8.2.0",
+    "electron-winstaller": "^2.6.3"
   }
 }
