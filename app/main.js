@@ -23,7 +23,7 @@ if (!setupEvents.handleSquirrelEvent()) {
 
             Window.main.loadURL('file://' + __dirname + '/index.html');
 
-            Window.main.webContents.openDevTools();
+            // Window.main.webContents.openDevTools();
 
             Window.main.on('closed', function () {
                 Window.main = null;
