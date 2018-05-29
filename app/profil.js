@@ -15,6 +15,9 @@ storage.get('profil', function(error, data) {
 
     jQuery('body').find('[name=nom]').val(data.nom);
     jQuery('body').find('[name=prenom]').val(data.prenom);
+    if(data.cadre){
+        jQuery('body').find('[name=cadre]').attr("checked", "checked");
+    }
     jQuery('body').find('[name=signature]').val(data.signature);
     jQuery('#signature_visuel').append(jQuery('<img />').attr('src', data.signature));
 });
@@ -23,6 +26,7 @@ jQuery('#save').on("click", function () {
     storage.set('profil', {
         nom         : jQuery('body').find('[name=nom]').val(),
         prenom      : jQuery('body').find('[name=prenom]').val(),
+        cadre       : jQuery('body').find('[name=cadre]').is(':checked'),
         signature   : jQuery('body').find('[name=signature]').val()
     });
     

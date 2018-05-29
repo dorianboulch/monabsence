@@ -18,15 +18,19 @@ storage.get('profil', function (error, data) {
 
     jQuery('body').find('[name=nom]').val(data.nom);
     jQuery('body').find('[name=prenom]').val(data.prenom);
+    if(data.cadre){
+        jQuery('body').find('[name=cadre]').attr("checked", "checked");
+    }
     jQuery('body').find('[name=signature]').val(data.signature);
 });
 
 jQuery('#save').on("click", function () {
 
     if (jQuery('body').find('[name=date_debut]').val() && jQuery('body').find('[name=date_fin]').val()) {
+        var isCadre = jQuery('body').find('[name=cadre]').is(':checked');
         switch (jQuery('body').find('[name=type]:checked').val()) {
-            case 'conges'   : generateConges(); break;
-            case 'rtt'      : generateRTT(); break;
+            case 'conges'   : generateConges(isCadre); break;
+            case 'rtt'      : generateRTT(isCadre); break;
         }
     } else {
         if (!jQuery('body').find('[name=date_debut]').val()) {
@@ -47,8 +51,15 @@ initDatePicker();
 
 checkType();
 
-function generateConges() {
-    var content = fs.readFileSync(__dirname + "/../files/conges.docx", "binary");
+function generateConges(cadre) {
+    var templatePath;
+    if(cadre){
+        templatePath = "/../files/conges-cadre.docx"
+    }else{
+        templatePath = "/../files/conges-non-cadre.docx"
+    }
+
+    var content = fs.readFileSync(__dirname + templatePath, "binary");
 
     var doc = new Docxtemplater(content);
 
@@ -83,8 +94,15 @@ function generateConges() {
     FileSaver.saveAs(out, "Demande de congés.docx");
 }
 
-function generateRTT() {
-    var content = fs.readFileSync(__dirname + "/../files/rtt.docx", "binary");
+function generateRTT(cadre) {
+    var templatePath;
+    if(cadre){
+        templatePath = "/../files/rtt-cadre.docx"
+    }else{
+        templatePath = "/../files/rtt-non-cadre.docx"
+    }
+
+    var content = fs.readFileSync(__dirname + templatePath, "binary");
 
     var doc = new Docxtemplater(content);
 
